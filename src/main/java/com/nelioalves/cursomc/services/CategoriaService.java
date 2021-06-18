@@ -35,8 +35,9 @@ public class CategoriaService {
 	}
 
 	public Categoria update(Categoria obj) {
-		find(obj.getId());
-		return repo.save(obj);
+		Categoria newObj = find(obj.getId());
+		updateData(newObj, obj);
+		return repo.save(newObj);
 
 	}
 
@@ -63,5 +64,9 @@ public class CategoriaService {
 	
 	public Categoria fromDTO (CategoriaDTO objDto) {
 		return new Categoria (objDto.getId(), objDto.getNome());
+	}
+	
+	private void updateData (Categoria newObj, Categoria obj) { // Este método é um método auxiliar que tem por intuito apenas atualizar os dois campos e manter os demais já existentes 
+		newObj.setNome(obj.getNome());
 	}
 }
